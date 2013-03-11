@@ -93,7 +93,7 @@ int main()
   // solve with parameter method
   solve_1(A, N, B, X);
 
-  cout << "X VALUE RESULTS (WITH PARAMETER METHOD)" << endl;
+  cout << "X VALUE RESULTS (WITH PARAMETER METHOD):" << endl;
 
   for(i = 0; i < N; i++)
     cout << "X(" << i << ") = " << X[i] << endl;
@@ -103,7 +103,7 @@ int main()
   // solve with return method
   X = solve_2(A, N, B);
 
-  cout << "X VALUE RESULTS (WITH RETURN METHOD)" << endl;
+  cout << "X VALUE RESULTS (WITH RETURN METHOD):" << endl;
   
   for(i = 0; i < N; i++)
     cout << "XALT(" << i << ") = " << X[i] << endl;
