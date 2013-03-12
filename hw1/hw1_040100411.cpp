@@ -30,6 +30,7 @@ int main()
   // variable declarations
   FILE *fp; // file pointer
   int N; // matrix N
+  float **A; // coefficients matrix
   float *B; // results matrix
   float *X; // roots matrix
 
@@ -49,10 +50,8 @@ int main()
   // get N of matrix
   fscanf(fp, "%d", &N);
 
-  // declare A (array of pointers)
-  float *A[N];
-
-  // allocate memory for B and X
+  // allocate memory for A, B and X
+  A = new float*[N];
   B = new float[N];
   X = new float[N];
 
