@@ -1,10 +1,10 @@
 /**********************************
- Student Number : 040100411
- Student Name   : İlker Kesen
- Course         : BLG221E
- CRN            : 20907
- Term           : 2013 Spring
- Homework       : #1
+Student Number : 040100411
+Student Name   : İlker Kesen
+Course         : BLG221E
+CRN            : 20907
+Term           : 2013 Spring
+Homework       : #1
 ***********************************/
 
 // headers and libraries
@@ -29,7 +29,7 @@ int main()
 {
   // variable declarations
   FILE *fp; // file pointer
-  int N; // matrix N
+  int N; // row size for matrices
   float **A; // coefficients matrix
   float *B; // results matrix
   float *X; // roots matrix
@@ -47,7 +47,7 @@ int main()
     exit(0);
   }
 
-  // get N of matrix
+  // get row size of matrices
   fscanf(fp, "%d", &N);
 
   // allocate memory for A, B and X
@@ -95,9 +95,14 @@ int main()
   cout << "X VALUE RESULTS (WITH PARAMETER METHOD):" << endl;
 
   for (i = 0; i < N; i++)
-    cout << "X(" << i << ") = " << X[i] << endl;
+    cout << "X(" << i + 1 << ") = " << X[i] << endl;
 
   cout << endl;
+
+  // free X and allocate it again
+  // to be sure that solve_2 works correctly
+  delete [] X;
+  X = new float[N];
 
   // solve with return method
   X = solve_2(A, N, B);
@@ -105,7 +110,7 @@ int main()
   cout << "X VALUE RESULTS (WITH RETURN METHOD):" << endl;
   
   for (i = 0; i < N; i++)
-    cout << "XALT(" << i << ") = " << X[i] << endl;
+    cout << "XALT(" << i + 1 << ") = " << X[i] << endl;
 
   cout << endl;
 
@@ -116,10 +121,12 @@ int main()
   for (i = 0; i < N; i++)
     delete [] A[i];
 
+  delete [] A;
   delete [] B;
   delete [] X;
 
   // to see the output in windows with double click
+  cout << endl << "Press enter to exit...";
   getchar();
 
   return 0;
