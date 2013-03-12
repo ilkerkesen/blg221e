@@ -41,7 +41,7 @@ int main()
   fp = fopen(FILENAME, "r");
 
   // if file cannot be opened, exit
-  if(fp == NULL) {
+  if (fp == NULL) {
     cout << FILENAME << " cannot be opened." << endl;
     exit(0);
   }
@@ -57,12 +57,12 @@ int main()
   X = new float[N];
 
   // read matrix from file
-  for(i = 0; i < N; i++) {
+  for (i = 0; i < N; i++) {
     // allocate memory for A[i]
     A[i] = new float[N-i];
 
     // read elements of A[i]
-    for(j = 0; j < N - i; j++) {
+    for (j = 0; j < N - i; j++) {
       fscanf(fp, "%f", &A[i][j]);
     }
 
@@ -74,12 +74,12 @@ int main()
   fclose(fp);
 
   // print matrix
-  for(i = 0; i < N; i++) {
+  for (i = 0; i < N; i++) {
     // set width for upper triangular matrix
     cout << setw(16 * i) << "";
 
     // write every ith row element
-    for(j = 0; j < N - i; j++) {
+    for (j = 0; j < N - i; j++) {
       cout << "A(" << i + 1 << "," << i + j + 1 << ") = ";
       cout << setiosflags(ios::left) << setw(7) << A[i][j];
     }
@@ -95,7 +95,7 @@ int main()
 
   cout << "X VALUE RESULTS (WITH PARAMETER METHOD):" << endl;
 
-  for(i = 0; i < N; i++)
+  for (i = 0; i < N; i++)
     cout << "X(" << i << ") = " << X[i] << endl;
 
   cout << endl;
@@ -105,7 +105,7 @@ int main()
 
   cout << "X VALUE RESULTS (WITH RETURN METHOD):" << endl;
   
-  for(i = 0; i < N; i++)
+  for (i = 0; i < N; i++)
     cout << "XALT(" << i << ") = " << X[i] << endl;
 
   cout << endl;
@@ -114,7 +114,7 @@ int main()
   verify(A, N, X);
 
   // free allocated instances
-  for(i = 0; i < N; i++)
+  for (i = 0; i < N; i++)
     delete [] A[i];
 
   delete [] B;
@@ -136,11 +136,11 @@ void solve_1(float *A[], int N, float *B, float *X)
   float hold;
 
   // scan every row
-  for(i = N - 1; i > -1; i--) {
+  for (i = N - 1; i > -1; i--) {
     hold = 0.0;
 
     // scan every column of ith row
-    for(j = N - i - 1; j > 0; j--) {
+    for (j = N - i - 1; j > 0; j--) {
       hold += X[i + j] * A[i][j];
     }
 
@@ -165,11 +165,11 @@ float *solve_2(float *A[], int N, float *B)
   X = new float[N];
 
   // scan every row
-  for(i = N - 1; i > -1; i--) {
+  for (i = N - 1; i > -1; i--) {
     hold = 0.0;
 
     // scan every column of ith row
-    for(j = N - (i + 1); j > 0; j--) {
+    for (j = N - (i + 1); j > 0; j--) {
       hold += X[i + j] * A[i][j];
     }
 
@@ -192,11 +192,11 @@ void verify(float *A[], int N, float *X)
   cout << "VERIFICATION RESULTS:" << endl;
 
   // scan every row
-  for(i = 0; i < N; i++) {
+  for (i = 0; i < N; i++) {
     b = 0.0;
 
     // scan every column
-    for(j = 0; j < N - i; j++) {
+    for (j = 0; j < N - i; j++) {
       b += A[i][j] * X[i + j];
     }
 
