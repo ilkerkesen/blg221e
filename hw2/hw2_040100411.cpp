@@ -177,7 +177,7 @@ Node *make_ordered_copy(Node *head)
 
     // memory allocation check
     if (temp == NULL) {
-      cout << "Memory cannot be allocated for ordered list." << endl;
+      cout << "Memory cannot be allocated for ordered list.";
       getchar();
       exit(0);
     }
