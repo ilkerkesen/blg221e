@@ -25,6 +25,9 @@ struct Node {
   Node *next;
 };
 
+// typedef
+typedef struct Node Node;
+
 // namespaces
 using namespace std;
 
