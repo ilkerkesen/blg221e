@@ -111,7 +111,10 @@ void HuffmanTree::build_array()
   int i;
 
   for (i = 0; i < N; i++) {
+    // allocate memory
     array[i] = new Node;
+
+    // fill fields with data
     array[i]->letter = letters[i];
     array[i]->frequency = frequencies[i];
     array[i]->left = NULL;
@@ -123,8 +126,8 @@ void HuffmanTree::build_array()
 void HuffmanTree::sort(Node *array[], int len)
 {
   // variables
-  int min;
-  Node *hold;
+  int min; // index of minimum element
+  Node *hold; // holder (for swap)
 
   // counters
   int i;
@@ -145,6 +148,7 @@ void HuffmanTree::sort(Node *array[], int len)
       }
     }
 
+    // swap elements
     hold = array[min];
     array[min] = array[i];
     array[i] = hold;
@@ -192,6 +196,7 @@ void HuffmanTree::build_tree()
     // create a new node
     new_node = new Node;
 
+    // fill fields with data
     new_node->frequency = tmp1->frequency + tmp2->frequency;
     new_node->letter = '*';
     new_node->left = tmp1;
@@ -210,17 +215,21 @@ void HuffmanTree::set_bits_helper(Node *node, int stack_top)
 {
   if (node != NULL) {
     if (node->letter == '*') {
+      // add 0 to the stack
       stack_bits[stack_top] = '0';
       set_bits_helper(node->left, stack_top + 1);
 
+      // add 1 to the stack
       stack_bits[stack_top] = '1';
       set_bits_helper(node->right, stack_top + 1);
     }
     else {
+      // get index
       int n = nth_char(node->letter);
+
+      // copy bits to the array element
       strncpy(bits_code[n], stack_bits, stack_top);
       bits_code[n][stack_top] = '\0';
-      stack_top--;
     }
   }
 }
@@ -239,7 +248,7 @@ void HuffmanTree::print_bits()
   }
 }
 
-// remove tree from memory
+// remove tree from memory (postorder)
 void HuffmanTree::free_tree(Node *node)
 {
   if (node != NULL) {
