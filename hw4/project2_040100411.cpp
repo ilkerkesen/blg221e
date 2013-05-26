@@ -195,7 +195,8 @@ void Graph::read_file()
 
   // if file cannot be opened, exit
   if (fp == NULL) {
-    cout << "File cannot be opened.";
+    cout << "File cannot be opened." << endl;
+    cout << "Press enter to exit...";
     getchar();
     exit(0);
   }
@@ -210,13 +211,24 @@ void Graph::read_file()
     stdcrs.push_back(vector<int>());
 
     // split integers
-    for (buffer = strtok(line, " "); buffer != NULL; buffer = strtok(NULL, " "))
+    for (buffer = strtok(line, " "); buffer != NULL; buffer = strtok(NULL, " ")) {
+      // exit if course number is greater than number of courses.
+      if (atoi(buffer) >= courses) {
+	cout << "Minimum "<< atoi(buffer) << " courses exist not "
+	     << courses << " courses." << endl;
+	cout << "Press enter to exit...";
+	getchar();
+	exit(0);
+      }
+
       stdcrs[i].push_back(atoi(buffer));
+    }
   }
 
   // check number of students
   if (i != students) {
     cout << "Input file is not correct. Check the number of the students.";
+    cout << endl << "Press enter to exit...";
     getchar();
     exit(0);
   }
