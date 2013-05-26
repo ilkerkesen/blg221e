@@ -23,10 +23,10 @@ Project        : #2
 using namespace std;
 
 // global variables
-string colors[20] = {("red"), ("black"), ("white"), ("green"), ("blue"),
-		     ("yellow"), ("orange"), ("gray"), ("brown"), ("purple"),
-		     ("ping"), ("cyan"), ("violet"), ("mint"), ("melon"),
-		     ("lava"), ("cinnamon"), ("denim"), ("coffee"), ("bronze")};
+string colors[20] = {("Red"), ("Black"), ("White"), ("Green"), ("Blue"),
+		     ("Yellow"), ("Orange"), ("Gray"), ("Brown"), ("Purple"),
+		     ("Pink"), ("Cyan"), ("Violet"), ("Mint"), ("Melon"),
+		     ("Lava"), ("Cinnamon"), ("Denim"), ("Coffee"), ("Bronze")};
 
 // Graph Struct
 struct Graph {
@@ -49,6 +49,7 @@ struct Graph {
   void print_course_degrees();
   void print_course_colors();
   void print_colors_course();
+  void print_chromatic_number();
 
   // private methods
   void read_file();
@@ -62,7 +63,12 @@ int main()
 {
   Graph g;
   g.build();
+  g.print_input();
+  g.print_graph_matrix();
+  g.print_course_degrees();
+  g.print_course_colors();
   g.print_colors_course();
+  g.print_chromatic_number();
 
   // to see the output in windows with double click
   cout << endl << "Press enter to exit...";
@@ -81,26 +87,56 @@ void Graph::build()
   set_colors();
 }
 
+void Graph::print_input()
+{
+  // counters
+  int i;
+  int j;
+
+  cout << "Number of students: " << students << endl;
+  cout << "Number of courses: " << courses << endl;
+
+  // print courses of students
+  for (i = 0; i < stdcrs.size(); i++) {
+    cout << endl << "Student " << i << " => Courses: ";
+
+    for (j = 0; j < stdcrs[i].size(); j++)
+      cout << stdcrs[i][j] << " ";
+  }
+
+  cout << endl << endl;
+}
+
 void Graph::print_graph_matrix()
 {
   // counters
   int i;
   int j;
 
+  cout << "Graph Matrix:" << endl;
+
+  // print matrix 
   for (i = 0; i < matrix.size(); i++) {
     for (j = 0; j < matrix[i].size(); j++)
       cout << matrix[i][j] << " ";
     
     cout << endl;
   }
+
+  cout << endl;
 }
 
 void Graph::print_course_degrees()
 {
+  // counter
   multimap <int, int>::iterator i;
+
+  cout << "Course Degrees:" << endl;
 
   for (i = degrees.begin(); i != degrees.end(); i++)
     cout << "Course: " << i->second << " Degree: " << i->first << endl;
+
+  cout << endl;
 }
 
 
@@ -109,30 +145,45 @@ void Graph::print_course_colors()
   // iterator
   map <int, string>::iterator i;
 
+  cout << "Course Colors (course->color):" << endl;
+
   for (i = course_colors.begin(); i != course_colors.end(); i++)
     cout << "Course: " << i->first << " Color: " << i->second << endl;
+
+  cout << endl;
 }
 
-void Graph::print_colors_course() {
+void Graph::print_colors_course()
+{
   // counters
   int i;
   int j;
 
+  cout << "Color Courses (color->courses):" << endl;
+
   for (i = 0; i < chromatic; i++) {
     cout << "Color: " << colors[i] << " => Courses: ";
+    
     for (j = 0; j < (colors_course[colors[i]]).size(); j++) {
       cout << colors_course[colors[i]][j] << " ";
     }
 
     cout << endl;
   }
+
+  cout << endl;
+}
+
+void Graph::print_chromatic_number()
+{
+  cout << "Chromatic Number: " << chromatic << endl;
 }
 
 void Graph::read_file()
 {
   // variables
   FILE *fp; // file pointer
-  char line[200]; // a line of the file
+  char line[300]; // a line of the file
   char *buffer; // buffer (split)
 
   // counters
@@ -298,7 +349,5 @@ void Graph::set_colors()
       // chromatic number increment
       chromatic++;
     }
-  }
-
-  
+  } 
 }
